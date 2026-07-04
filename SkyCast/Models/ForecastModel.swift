@@ -85,5 +85,31 @@ struct AirQuality : Equatable {
     enum AqiAccent {
         case good, moderate,sensitive,unhelthy,veryUnhelth , hazardous
     }
-                        
+    
+    static func classify(usAqi: Int) -> AirQuality {
+        switch usAqi {
+        case ..<51: return AirQuality(usAqi: usAqi, category: "Good", description: "Air Quality is satisfactory", accent: .good)
+            
+        case 51..<101: return AirQuality(usAqi: usAqi, category: "Moderate", description: "Acceptabel for most, sensitive groups take care", accent: .moderate)
+            
+        case 101..<151: return AirQuality(usAqi: usAqi, category: "Unhealthy for Sensitive", description: "Sensitive groups may experience effects.", accent: .sensitive)
+        
+        case 151..<201: return AirQuality(usAqi: usAqi, category: "Unhealthy", description: "Every may experince effect", accent: .unhelthy)
+        
+        case 201..<301: return AirQuality(usAqi: usAqi, category: "Very Unhealthy", description: "Health alert: serious effect for everyone", accent: .veryUnhelth)
+        default:
+            return AirQuality(usAqi: usAqi, category: "Hazardous", description: "Emergencey conditions", accent: .hazardous)
+        }
+    }
+}
+extension Weather {
+    static func map(code : Int,isDay: Bool) ->(Weather , String) {
+        switch code {
+        case 0:return isDay ? (.sunny, "Sunny") : (.clear, "Clear")
+            
+            
+        default:
+            <#code#>
+        }
+    }
 }
