@@ -106,10 +106,40 @@ extension Weather {
     static func map(code : Int,isDay: Bool) ->(Weather , String) {
         switch code {
         case 0:return isDay ? (.sunny, "Sunny") : (.clear, "Clear")
-            
-            
+        case 1:
+            return isDay ? (.sunny, "Mostly Clear") : (.clear, "Mostly Clear")
+        case 2:
+            return (.cloudy, "Partly Cloudy")
+        case 3:
+            return (.cloudy, "Overcast")
+        case 45, 48:
+            return (.cloudy, "Fog")
+        case 51, 53, 55:
+            return (.rainy, "Drizzle")
+        case 56, 57:
+            return (.rainy, "Freezing Drizzle")
+        case 61:
+            return (.rainy, "Light Rain")
+        case 63:
+            return (.rainy, "Rain")
+        case 65:
+            return (.rainy, "Heavy Rain")
+        case 66, 67:
+            return (.stromy, "Freezing Rain")
+        case 71, 73, 75:
+            return (.cloudy, "Snow")
+        case 77:
+            return (.cloudy, "Snow Grains")
+        case 80, 81, 82:
+            return (.stromy, "Rain Showers")
+        case 85, 86:
+            return (.cloudy, "Snow Showers")
+        case 95:
+            return (.stromy, "Thunderstorm")
+        case 96, 99:
+            return (.stromy, "Thunderstorm w/ Hail")
         default:
-            <#code#>
+            return (.cloudy, "Cloudy")
         }
     }
 }
