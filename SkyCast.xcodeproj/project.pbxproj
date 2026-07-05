@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		766328B42FFAB7440034BF7B /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 766328B32FFAB7440034BF7B /* BottomSheet */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		7663289A2FF67EB20034BF7B /* SkyCast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkyCast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				766328B42FFAB7440034BF7B /* BottomSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = SkyCast;
 			packageProductDependencies = (
+				766328B32FFAB7440034BF7B /* BottomSheet */,
 			);
 			productName = SkyCast;
 			productReference = 7663289A2FF67EB20034BF7B /* SkyCast.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = 766328912FF67EB20034BF7B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				766328B22FFAB7440034BF7B /* XCRemoteSwiftPackageReference "BottomSheet" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7663289B2FF67EB20034BF7B /* Products */;
 			projectDirPath = "";
@@ -332,6 +341,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		766328B22FFAB7440034BF7B /* XCRemoteSwiftPackageReference "BottomSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Wouter125/BottomSheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		766328B32FFAB7440034BF7B /* BottomSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 766328B22FFAB7440034BF7B /* XCRemoteSwiftPackageReference "BottomSheet" */;
+			productName = BottomSheet;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 766328922FF67EB20034BF7B /* Project object */;
 }
