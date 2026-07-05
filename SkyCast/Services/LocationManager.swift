@@ -63,3 +63,36 @@ final class LocationManager: NSObject,ObservableObject {
         }
     }
 }
+
+extension LocationManager: CLLocationManagerDelegate {
+    nonisolated func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let coord = locations.last?.coordinate else {
+            return
+    }
+        Task {
+            @MainActor in
+            self.lastCoordinate = coord
+            self.didfail = false
+            self.resume(with: .success(coord))
+        }
+    }
+    nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
+        Task {
+            @MainActor in
+            self.didfail = true
+            self.resume(with: .failure(error))
+        }
+    }
+    nonisolated func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        let status = manager.authorizationStatus
+        Task {
+            @MainActor in
+            self.authrizationStatus = status
+            if status == .authorizedWhenInUse || status == .authorizedAlways {
+                manager.requestLocation()
+            } else if status == .denied || status == .restricted {
+                self.resume(with: .failure(LocationError.notAuthorized))
+            }
+        }
+    }
+}
