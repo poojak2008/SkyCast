@@ -54,7 +54,7 @@ struct Forecast : Identifiable {
     var icon : String { sfSymbols }
 }
 
-struct WhetherMetrics: Equatable {
+struct WheatherMetrics: Equatable {
     var uvIndex: Double?
     var sunrise: Date?
     var sunset: Data?
