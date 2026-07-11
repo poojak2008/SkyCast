@@ -94,7 +94,7 @@ private struct OMForecastResponse: Decodable {
 
 private struct OMAirQualityRespnse: Decodable {
     struct Current : Decodable {
-        let us_aqi: Double
+        let us_aqi: Double?
     }
     let current: Current?
 }
@@ -292,22 +292,21 @@ final class WeatherService {
     private func get<T: Decodable>(_ url: URL) async throws -> T {
         do {
             let (data, response) = try await session.data(from: url)
-            if let http = response as? HTTPURLResponse,!(200...299).contains(http.statusCode) {
+            if let http = response as? HTTPURLResponse, !(200...299).contains(http.statusCode) {
                 throw WeatherServiceError.badResponse(http.statusCode)
             }
             do {
                 return try JSONDecoder().decode(T.self, from: data)
-            } } catch {
+            } catch {
                 throw WeatherServiceError.decoding(error)
             }
-            catch let e as WeatherServiceError {
-                throw e
-            }
-            catch {
-                throw WeatherServiceError.transport(error)
-            }
+        } catch let e as WeatherServiceError {
+            throw e
+        } catch {
+            throw WeatherServiceError.transport(error)
         }
     }
+}
 
 private extension Array {
     subscript(safe index: Int) -> Element? {
