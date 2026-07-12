@@ -35,11 +35,16 @@ final class WeatherViewModel : ObservableObject {
     private let savedCitiesKey = "savedCities.v1"
     
     init(){
-        
+        loadSavedCities()
+        if savedCities.isEmpty {
+            savedCities = Self.defaultCities
+            persistSavedCities()
+        }
     }
     
     func bootstrap() async {
-        
+        await refreshCurrentLocationWeather()
+        await refreshSavedCityForecasts()
     }
     func refreshCurrentLocationWeather() async {
         isLoading = true
@@ -117,8 +122,8 @@ final class WeatherViewModel : ObservableObject {
             return
         }
         let city = SavedCity(name: result.shortName,
-                             latitude: result.latitude ?? <#default value#>,
-                             longitude: result.longitude ?? <#default value#>)
+                             latitude: result.latitude!,
+                             longitude: result.longitude!)
         savedCities.insert(city, at: 0)
         persistSavedCities()
         Task { await loadWeather(for: city)}
