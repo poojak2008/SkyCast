@@ -8,11 +8,29 @@
 import SwiftUI
 
 struct TabBar: View {
+    var action : () -> Void
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Arc()
+                .fill(Color.tabBarBackground)
+                .frame(height: 88)
+                .overlay {
+                    Arc()
+                        .stroke(Color.apptabBarBorder,lineWidth: 0.5)
+                }
+            HStack {
+                Button {
+                    action()
+                } label: {
+                    Image(systemName: "mappin.and.ellipse")
+                        .frame(width: 44,height: 44)
+                }
+                Spacer()
+                
+                
+            }
+        }
     }
 }
 
-#Preview {
-    TabBar()
-}
